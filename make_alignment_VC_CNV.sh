@@ -72,7 +72,7 @@ CUT="cut -f1,2,3"
 BWAMEM="${soft}/bin/bwa mem -M "
 
 # BAM-Readcount
-BamReadcount="${soft}/bin/bam-readcount -q 1 -b 20 -w 1 -f ${GENOME} "
+BamReadcount="${soft}/bin/bam-readcount -q 1 -b ${minBaseQual} -w 1 -f ${GENOME} "
 
 # SAMTOOLS
 SAMTOOLS="${soft}/bin/samtools" # path to samtools
