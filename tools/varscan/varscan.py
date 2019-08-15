@@ -445,7 +445,8 @@ class VarScanCaller (object):
         for option, value in varcall_engine_option_mapping:
             if value is not None:
                 varcall_engine_options += [option, str(value)]
-        pileup_engine_options = ['-B']
+        # pass -C 50 option to samtools mpileup exclusively!!
+        pileup_engine_options = ['-B', '-C', '50']
         if self.count_orphans:
             pileup_engine_options += ['-A']
         if not self.detect_overlaps:
@@ -883,6 +884,9 @@ class VarScanCaller (object):
             )
             refseq = io_stack.enter_context(pysam.FastaFile(self.ref_genome))
             pileup_args = self._get_pysam_pileup_args()
+            # modify the pileup arguments to mimick bash pipeline settings
+            pileup_args['min_mapping_quality'] = 1
+            pileup_args['min_base_quality'] = 20
             _get_stats = get_allele_stats
             for record in invcf:
                 is_indel = False
