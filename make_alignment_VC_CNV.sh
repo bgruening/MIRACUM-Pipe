@@ -187,7 +187,7 @@ fi
      ${SAMSORT} ${bam} -T ${prefixsort} -o ${sortbam}
 
 # rmdup bam
-     ${SAMVIEW} -b -f 0x2 -q1 ${sortbam} | ${SAMRMDUP} - ${rmdupbam}
+     ${SAMVIEW} -b -F 0xC -q1 ${sortbam} | ${SAMRMDUP} - ${rmdupbam}
 
 # make bai
      ${SAMINDEX} ${rmdupbam} ${bai}
